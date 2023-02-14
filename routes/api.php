@@ -14,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+/* This is a route that returns a json response. */
+// liên kết api fake
+// Route::get('/postAPi', function(){
+//     return response()->json([
+//         'posts' => [
+//             'title' => 'Post one'
+//         ] 
+//         ]);
+// });
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
