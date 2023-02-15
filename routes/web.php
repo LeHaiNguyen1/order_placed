@@ -23,18 +23,39 @@ use App\Models\listing;
 
 //Chèn value vào view Lấy toàn bộ danh sách
 Route::get('/', function () {
-    return view('listings', [
+    return view('admin.home_page.listings', [
         'heading' => 'latest Listings',
         'listings' => Listing::all()
     ]);
 });
 
     // single listing
+    //Cách 1 
+    // Route::get('/listings/{id}', function($id){
+    //     return view('admin.home_page.listing', [
+    //         'listing' => Listing::find($id)
+    //     ]);
+    // });
+
+    //Cách 2 nếu ra trường hợp lỗi
+    // Route::get('/listings/{listing}', function(Listing $listing){
+    //     return view('admin.home_page.listing', [
+    //         'listing' => $listing
+    //     ]);
+    // });
+    //Cách 3 nếu ra trường hợp lỗi
     Route::get('/listings/{id}', function($id){
-        return view('listing', [
-            'listing' => Listing::find($id)
-        ]);
+        $listing = Listing::find($id);
+        if($listing){
+            return view('admin.home_page.listing',[
+                'listing' => $listing
+            ]);
+        }else{
+            return view('html.err');
+        }
+
     });
+   
 
 //dán giá trị content vào network để kiểm tra 
 // Route::get('/page_01',function(){
